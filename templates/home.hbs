@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do Lists!</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Modak&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+    /* Linear gradient from top left to bottom right */
+    background: linear-gradient(to bottom, #c097cf, #eeeeee);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .title-1 {
+    font-family: "Modak", cursive;
+    color: #3c383e;
+    font-size: 65px;
+    margin-bottom: -30px;
+    padding: 0px;
+  }
+  
+  .title-2 {
+    font-family: "Modak", cursive;
+    color: #8260a2;
+    font-size: 68px;
+    margin-top: 0%;
+    padding: 0px;
+  }
+  
+  .description {
+    font-size: 16px;
+    font-display: arial, sans-serif;
+    color: #3c383e;
+    margin-top: -10px;
+    margin-bottom: 25px;
+  }
+  
+  .person-container {
+    background-color: #c097cf;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px -2px 5px -2px;
+  }
+  
+  .person-header {
+    background-color: #8260a2;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    margin-bottom: 5px;
+  }
+  
+  .task-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    color: black;
+    padding: 2px;
+    border-radius: 5px;
+    margin: 5px 0;
+    width: 100%; /* Buat task list memenuhi container */
+    box-sizing: border-box; /* Pastikan padding dihitung di dalam width */
+  }
+  
+  .list-group-item {
+    display: flex;
+    justify-content: space-between; /* Membuat checkbox di kiri dan bintang di kanan */
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    padding: 5px;
+    border: none; /* Hilangkan border jika tidak diinginkan */
+  }
+  
+  .list-task {
+    list-style-type: none; /* Hilangkan bullet point */
+    padding-left: 0; /* Hilangkan padding di sebelah kiri */
+    margin-left: 0; /* Hilangkan margin di sebelah kiri */
+    width: 100%; /* Buat list memenuhi container */
+  }
+  
+  .task-container input[type="checkbox"] {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  .transparent-btn {
+    background-color: transparent;
+    border: 2px solid #b687dc;
+    color: #b687dc;
+    padding: 5px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .transparent-btn:hover {
+    background-color: #b687dc;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-task {
+    width: 100%; /* Tombol akan mengambil lebar penuh dari container-nya */
+    padding: 10px; /* Tambahkan padding jika diperlukan */
+    margin-top: 5px;
+    background-color: white;
+    color: #8260a2;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-task:hover {
+    background-color: #b687dc;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-primary {
+    background-color: #b687dc;
+    border-color: #b687dc;
+  }
+  
+  .btn-primary:hover {
+    background-color: #9a6fcf;
+  }
+  
+  .modal-footer .btn {
+    width: 100px; /* Lebar tombol */
+    height: 35px; /* Tinggi tombol */
+    font-size: 18px; /* Ukuran font tombol */
+    display: flex;
+    padding: 0;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-dialog {
+    max-width: 550px; /* Maksimal lebar modal */
+    max-height: 10vh; /* Maksimal tinggi modal */
+  }
+  
+  .modal-content {
+    background-color: #d7c3df;
+    padding: -10px;
+  }
+  
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -15px;
+    margin-bottom: -15px;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+    color: #8260a2;
+  }
+  
+  /* Menghilangkan border pada modal-header dan modal-footer */
+  .modal-header,
+  .modal-footer {
+    border: none; /* Menghilangkan garis pemisah */
+  }
+  
+  .card-header,
+  .list-group,
+  .card-footer {
+    border: none;
+  }
+  
+  .favorite {
+    cursor: pointer;
+    font-size: 18px;
+    color: black;
+  }
+  
+  .favorite.active {
+    color: gold;
+  }
+  
+  /* Awalnya sembunyikan tombol edit dan delete */
+  .person-container .btn-group,
+  .task-container .btn-group {
+    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  
+  /* Keyframes untuk animasi fade-in dan scale-up */
+  @keyframes fadeInScaleUp {
+    0% {
+      opacity: 0;
+      transform: scale(0.9); /* Mulai dari skala yang lebih kecil */
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1); /* Skala normal */
+    }
+  }
+  
+  /* Terapkan hover pada .person-container, bukan pada header atau task saja */
+  .person-container:hover .btn-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 100%;
+    animation: fadeInScaleUp 1s ease forwards; /* Animasi fade-in dan scale-up */
+  }
+  
+  /* Tambahkan sedikit delay pada animasi jika diperlukan */
+  .person-container:hover .btn-group {
+    animation-delay: 0.1s; /* Jeda sebelum animasi dimulai */
+  }
+  
+  /* Atur btn-group untuk lebar penuh dan tetap di dalam container */
+  .person-container .btn-group {
+    display: none;
+    opacity: 0;
+    justify-content: space-around; /* Menyebar tombol secara rata */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    bottom: -2px; /* Tempatkan di bagian bawah container */
+    left: 0; /* Rata kiri */
+    right: 0; /* Rata kanan */
+  }
+  
+  /* Style untuk tombol edit dan delete */
+  .btn-edit,
+  .btn-delete {
+    background-color: #28a745; /* Hijau untuk edit */
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Tambahkan sedikit transisi juga pada tombol */
+  }
+  
+  .btn-delete {
+    background-color: #dc3545; /* Merah untuk delete */
+  }
+  
+  /* Tambahkan transisi untuk hover pada tombol */
+  .btn-edit:hover,
+  .btn-delete:hover {
+    transform: scale(1.05); /* Tambahkan efek zoom saat di-hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Lebih tebal saat hover */
+  }
+  
+    </style>
+  </head>
+  <body onload="showHomePage()">
+    <!-- Home Section (Initially Visible) -->
+    <div id="homeSection" class="text-center">
+      <h1 class="title-1">TO DO</h1>
+      <h1 class="title-2">LISTS!</h1>
+      <h3 class="description">
+        Make your own to-do lists along with your friends or family!
+      </h3>
+
+      <!-- Login and Signup Buttons -->
+      <div class="text-center mb-4">
+        <button class="btn btn-primary" onclick="redirectToLogin()">
+          Login
+        </button>
+        <button class="btn btn-secondary" onclick="redirectToSignup()">
+          Sign Up
+        </button>
+      </div>
+
+      <!-- Add Person Button -->
+<!--      <div class="text-center mb-4">
+        <button class="btn transparent-btn" onclick="addPerson()">
+          Add person +
+        </button>
+      </div> -->
+
+      <!-- Container for Cards -->
+      <div class="container-fluid">
+        <ul
+          class="list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-3 g-10"
+          id="card-container"
+        >
+          <!-- Cards will be added here dynamically -->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Modals for Login and Signup -->
+    <!-- Login Modal -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Login</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input
+              type="text"
+              class="form-control mb-2"
+              id="loginUsername"
+              placeholder="Username"
+            />
+            <input
+              type="password"
+              class="form-control"
+              id="loginPassword"
+              placeholder="Password"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-primary" onclick="login()">
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div
+      class="modal fade"
+      id="signupModal"
+      tabindex="-1"
+      aria-labelledby="signupModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input
+              type="text"
+              class="form-control mb-2"
+              id="signupUsername"
+              placeholder="Username"
+            />
+            <input
+              type="email"
+              class="form-control mb-2"
+              id="signupEmail"
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              class="form-control"
+              id="signupPassword"
+              placeholder="Password"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button type="button" class="btn btn-primary" onclick="signup()">
+              Sign Up
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function redirectToLogin() {
+  window.location.href = "/login"; // Adjust the route as per your backend configuration
+}
+
+function redirectToSignup(){
+  window.location.href="/signup";
+}
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gNz5uwW1oBHy3JOyQRZj9izpG2F5NgN5+R8KHfQgiI6HjFYclKddolI4Kr+EdkBx"
+      crossorigin="anonymous"
+    >
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

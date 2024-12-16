@@ -1,0 +1,260 @@
+body {
+    /* Linear gradient from top left to bottom right */
+    background: linear-gradient(to bottom, #c097cf, #eeeeee);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .title-1 {
+    font-family: "Modak", cursive;
+    color: #3c383e;
+    font-size: 65px;
+    margin-bottom: -30px;
+    padding: 0px;
+  }
+  
+  .title-2 {
+    font-family: "Modak", cursive;
+    color: #8260a2;
+    font-size: 68px;
+    margin-top: 0%;
+    padding: 0px;
+  }
+  
+  .description {
+    font-size: 16px;
+    font-display: arial, sans-serif;
+    color: #3c383e;
+    margin-top: -10px;
+    margin-bottom: 25px;
+  }
+  
+  .person-container {
+    background-color: #c097cf;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px -2px 5px -2px;
+  }
+  
+  .person-header {
+    background-color: #8260a2;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    margin-bottom: 5px;
+  }
+  
+  .task-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    color: black;
+    padding: 2px;
+    border-radius: 5px;
+    margin: 5px 0;
+    width: 100%; /* Buat task list memenuhi container */
+    box-sizing: border-box; /* Pastikan padding dihitung di dalam width */
+  }
+  
+  .list-group-item {
+    display: flex;
+    justify-content: space-between; /* Membuat checkbox di kiri dan bintang di kanan */
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    padding: 5px;
+    border: none; /* Hilangkan border jika tidak diinginkan */
+  }
+  
+  .list-task {
+    list-style-type: none; /* Hilangkan bullet point */
+    padding-left: 0; /* Hilangkan padding di sebelah kiri */
+    margin-left: 0; /* Hilangkan margin di sebelah kiri */
+    width: 100%; /* Buat list memenuhi container */
+  }
+  
+  .task-container input[type="checkbox"] {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  .transparent-btn {
+    background-color: transparent;
+    border: 2px solid #b687dc;
+    color: #b687dc;
+    padding: 5px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .transparent-btn:hover {
+    background-color: #b687dc;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-task {
+    width: 100%; /* Tombol akan mengambil lebar penuh dari container-nya */
+    padding: 10px; /* Tambahkan padding jika diperlukan */
+    margin-top: 5px;
+    background-color: white;
+    color: #8260a2;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-task:hover {
+    background-color: #b687dc;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-primary {
+    background-color: #b687dc;
+    border-color: #b687dc;
+  }
+  
+  .btn-primary:hover {
+    background-color: #9a6fcf;
+  }
+  
+  .modal-footer .btn {
+    width: 100px; /* Lebar tombol */
+    height: 35px; /* Tinggi tombol */
+    font-size: 18px; /* Ukuran font tombol */
+    display: flex;
+    padding: 0;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-dialog {
+    max-width: 550px; /* Maksimal lebar modal */
+    max-height: 10vh; /* Maksimal tinggi modal */
+  }
+  
+  .modal-content {
+    background-color: #d7c3df;
+    padding: -10px;
+  }
+  
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -15px;
+    margin-bottom: -15px;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+    color: #8260a2;
+  }
+  
+  /* Menghilangkan border pada modal-header dan modal-footer */
+  .modal-header,
+  .modal-footer {
+    border: none; /* Menghilangkan garis pemisah */
+  }
+  
+  .card-header,
+  .list-group,
+  .card-footer {
+    border: none;
+  }
+  
+  .favorite {
+    cursor: pointer;
+    font-size: 18px;
+    color: black;
+  }
+  
+  .favorite.active {
+    color: gold;
+  }
+  
+  /* Awalnya sembunyikan tombol edit dan delete */
+  .person-container .btn-group,
+  .task-container .btn-group {
+    display: none;
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  
+  /* Keyframes untuk animasi fade-in dan scale-up */
+  @keyframes fadeInScaleUp {
+    0% {
+      opacity: 0;
+      transform: scale(0.9); /* Mulai dari skala yang lebih kecil */
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1); /* Skala normal */
+    }
+  }
+  
+  /* Terapkan hover pada .person-container, bukan pada header atau task saja */
+  .person-container:hover .btn-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 100%;
+    animation: fadeInScaleUp 1s ease forwards; /* Animasi fade-in dan scale-up */
+  }
+  
+  /* Tambahkan sedikit delay pada animasi jika diperlukan */
+  .person-container:hover .btn-group {
+    animation-delay: 0.1s; /* Jeda sebelum animasi dimulai */
+  }
+  
+  /* Atur btn-group untuk lebar penuh dan tetap di dalam container */
+  .person-container .btn-group {
+    display: none;
+    opacity: 0;
+    justify-content: space-around; /* Menyebar tombol secara rata */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    bottom: -2px; /* Tempatkan di bagian bawah container */
+    left: 0; /* Rata kiri */
+    right: 0; /* Rata kanan */
+  }
+  
+  /* Style untuk tombol edit dan delete */
+  .btn-edit,
+  .btn-delete {
+    background-color: #28a745; /* Hijau untuk edit */
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Tambahkan sedikit transisi juga pada tombol */
+  }
+  
+  .btn-delete {
+    background-color: #dc3545; /* Merah untuk delete */
+  }
+  
+  /* Tambahkan transisi untuk hover pada tombol */
+  .btn-edit:hover,
+  .btn-delete:hover {
+    transform: scale(1.05); /* Tambahkan efek zoom saat di-hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Lebih tebal saat hover */
+  }
+  
