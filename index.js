@@ -4,8 +4,8 @@ const path = require("path");
 const hbs = require("hbs");
 const { User, Group } = require("./mongodb");
 
-const templatePath = path.join(__dirname, "../templates");
-const frontendPath = path.join(__dirname, "../frontend");
+const templatePath = path.join(__dirname, "./templates");
+const frontendPath = path.join(__dirname, "./frontend");
 
 app.use(express.json());
 app.set("view engine", "hbs");
